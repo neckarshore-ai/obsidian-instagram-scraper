@@ -1,0 +1,18 @@
+{
+  "name": "neckarshore-ai",
+  "owner": {
+    "name": "Neckarshore AI",
+    "url": "https://neckarshore.ai"
+  },
+  "plugins": [
+    {
+      "name": "obsidian-instagram-scraper",
+      "source": "./",
+      "description": "Scrape Instagram profiles (incl. Reel transcripts) into Obsidian-friendly Markdown notes — Apify + whisper.cpp + Anthropic Haiku.",
+      "version": "0.1.0",
+      "repository": "https://github.com/neckarshore-ai/obsidian-instagram-scraper",
+      "license": "MIT",
+      "keywords": ["obsidian", "obsidian-plugin", "claude-code", "agent-skills", "instagram", "scraper", "apify", "whisper", "ai", "research"]
+    }
+  ]
+}

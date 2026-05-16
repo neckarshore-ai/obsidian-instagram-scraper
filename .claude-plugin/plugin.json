@@ -1,0 +1,12 @@
+{
+  "name": "obsidian-instagram-scraper",
+  "version": "0.1.0",
+  "description": "Scrape Instagram profiles (incl. Reel transcripts) into Obsidian-friendly Markdown notes — Apify + whisper.cpp + Anthropic Haiku.",
+  "author": {
+    "name": "Neckarshore AI",
+    "url": "https://neckarshore.ai"
+  },
+  "repository": "https://github.com/neckarshore-ai/obsidian-instagram-scraper",
+  "license": "MIT",
+  "keywords": ["obsidian", "obsidian-plugin", "claude-code", "agent-skills", "instagram", "scraper", "apify", "whisper", "ai", "research"]
+}
