@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -297,7 +298,14 @@ def main() -> int:
 
     out_dir = args.out_dir
     if out_dir is None:
-        out_dir = Path("data") / "instagram"
+        vault = os.environ.get("OBSIDIAN_VAULT_PATH")
+        if not vault:
+            sys.stderr.write(
+                "ERROR: --out-dir not provided and OBSIDIAN_VAULT_PATH is not set.\n"
+                "Either pass --out-dir <path> or export OBSIDIAN_VAULT_PATH=/path/to/vault.\n"
+            )
+            return 3
+        out_dir = Path(vault) / "Instagram Scraper"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
