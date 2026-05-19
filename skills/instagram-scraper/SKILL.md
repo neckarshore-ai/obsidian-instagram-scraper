@@ -110,16 +110,20 @@ regardless. Don't promise more than that — see `references/apify-actor.md`.
 
 ### 4. Run the scrape
 
-**Default `--out-dir` = the user's Obsidian Inbox/Social Scrapers/Instagram Scraper folder.** Always
-pass it explicitly:
+**`--out-dir` resolves from `$OBSIDIAN_VAULT_PATH`** — the env var pointing to the user's
+Obsidian vault root. Always pass `--out-dir` explicitly:
 
 ```bash
 "$PY" "$SKILL_DIR/scripts/scrape_profile.py" \
   --usernames "<comma-separated handles or URLs>" \
   --posts-limit 12 \
   --transcribe \
-  --out-dir "$HOME/Vaults/Nexus/001_Inbox - Temporary holding area for new, unprocessed notes/Social Scrapers/Instagram Scraper"
+  --out-dir "${OBSIDIAN_VAULT_PATH:?Set OBSIDIAN_VAULT_PATH to your vault root before running this skill}/Instagram Scraper"
 ```
+
+If the user's vault has a dedicated inbox folder (e.g. `Inbox/Social Scrapers/Instagram Scraper`),
+append that path segment. Otherwise the default `<vault>/Instagram Scraper` is fine — that's
+where omitted `--out-dir` also lands (the script auto-resolves from `$OBSIDIAN_VAULT_PATH`).
 
 The script creates `<out-dir>/<username>/` subfolders, writes one `_<username> overview.json`
 per profile (overwritten on re-scrape), and (with `--transcribe`) fills the JSON with
@@ -128,7 +132,7 @@ per profile (overwritten on re-scrape), and (with `--transcribe`) fills the JSON
 summary with `succeeded`/`failed`/`transcription_results`.
 
 Override the default destination only when the user explicitly says where (project repo, Desktop,
-etc.). Otherwise, always Obsidian.
+etc.). Otherwise, always the Obsidian vault.
 
 ### 5. Render reports
 
