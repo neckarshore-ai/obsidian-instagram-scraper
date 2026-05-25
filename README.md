@@ -27,6 +27,27 @@ In Claude Code:
 
 Run each command as a **separate Claude Code input** (one chat submission per command). Pasting both at once will mangle them into a single failing argument.
 
+## First-Run Setup (one-time, manual)
+
+After `/plugin install`, the Python virtual environment used by the skill scripts is **not** bootstrapped automatically. Claude Code's auto-mode classifier blocks unattended `python3 -m venv` + `pip install` on first invocation — by design, since installing Python dependencies into your shell environment is a deliberate action that should not happen silently.
+
+Do it once, in a regular terminal (not inside Claude Code):
+
+```bash
+# 1. Locate the skill install directory (Marketplace install).
+SKILL_DIR=$(find ~/.claude/plugins/cache -path '*/obsidian-instagram-scraper/*/skills/instagram-scraper' -type d 2>/dev/null | head -1)
+echo "$SKILL_DIR"   # should print a single path; empty means plugin is not installed yet
+
+# 2. Bootstrap the venv.
+cd "$SKILL_DIR"
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+```
+
+For non-Marketplace installs (direct symlink or local clone), point `SKILL_DIR` at the `skills/instagram-scraper` subfolder of your clone and run step 2 only.
+
+Once the venv is built, the skill works from any Claude Code chat. You do not repeat this setup unless `requirements.txt` changes (which is rare — `requests` + `anthropic` are the only runtime deps).
+
 ## Prerequisites
 
 | What | Why | Where |

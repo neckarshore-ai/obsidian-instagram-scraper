@@ -69,9 +69,11 @@ briefing or content tags. Default model: `claude-haiku-4-5-20251001`.
 ### Skill venv
 
 ```bash
-SKILL_DIR=~/.claude/skills/instagram-scraper
-PY=$SKILL_DIR/.venv/bin/python
+SKILL_DIR="${CLAUDE_PLUGIN_ROOT}/skills/instagram-scraper"
+PY="$SKILL_DIR/.venv/bin/python"
 ```
+
+If `$PY` does not exist on first invocation, the user has not run the **First-Run Setup** yet — see the plugin's README for the one-time `python3 -m venv` + `pip install -r requirements.txt` bootstrap.
 
 ## When to invoke this skill
 
